@@ -2,5 +2,5 @@
 
 public interface IStatistic
 {
-    
+    public Statistic Statistic { get; }
 }
