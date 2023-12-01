@@ -1,13 +1,13 @@
 ﻿namespace ProjectTrainStation;
 
-public class TrainStation : IStatistic
+public class TrainStation : ITicketStatistic
 {
     public string Name { get; }
-    public Statistic Statistic { get; }
+    public TicketStatistic TicketStatistic { get; }
 
     public TrainStation(string name)
     {
         Name = name;
-        this.Statistic = new Statistic();
+        this.TicketStatistic = new TicketStatistic();
     }
 }

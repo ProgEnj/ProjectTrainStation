@@ -1,16 +1,52 @@
-﻿namespace ProjectTrainStation;
+﻿using System.ComponentModel;
 
-public class Train : IStatistic
+namespace ProjectTrainStation;
+
+public class Train : ITicketStatistic
 {
-    public Train(string id, List<Carriage> carriages)
-    {
-        Statistic = new Statistic();
-        ID = id;
-        Carriages = carriages;
-    }
-
-    public Statistic Statistic { get; }
+    public TicketStatistic TicketStatistic { get; }
     private string ID { get; }
     
-    private List<Carriage> Carriages { get; }
+    public List<Carriage> Carriages { get; }
+    
+    public Train(Enum carriageType, int numberOfCarriages)
+    {
+        Random rnd = new Random();
+        TicketStatistic = new TicketStatistic();
+        ID = Convert.ToString(rnd.Next(1, 10000));
+        Carriages = new List<Carriage>(numberOfCarriages);
+
+        switch (carriageType)
+        {
+            case CarriageType.CouchetteCar:
+                while (Carriages.Count < numberOfCarriages)
+                { Carriages.Add(new CouchetteCar(40));}
+                break;
+            
+            case CarriageType.SleepingCar:
+                while (Carriages.Count < numberOfCarriages)
+                { Carriages.Add(new SleepingCar(40));}
+                break;
+            
+            case CarriageType.CorridorCoach:
+                while (Carriages.Count < numberOfCarriages)
+                { Carriages.Add(new СorridorCoach(40));}
+                break;
+        }
+    }
+    
+    
+    public void AddTicket(Ticket ticket)
+    {
+        Carriages[ticket.CarriageIndex].AddTicket(ticket);
+        TicketStatistic.AddRecord(ticket);
+    }
+
+    public void RemoveTicket(Ticket ticket)
+    {
+        Carriages[ticket.CarriageIndex].RemoveTicket(ticket);
+        TicketStatistic.RemoveRecord(ticket);
+    }
+    
+    
 }

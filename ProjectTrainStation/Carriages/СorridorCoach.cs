@@ -2,7 +2,7 @@
 
 public class СorridorCoach : Carriage
 {
-    public СorridorCoach(int price, Enum CarriageType, int totalSeats) : base(price, CarriageType, totalSeats)
+    public СorridorCoach(int totalSeats) : base(100, CarriageType.CorridorCoach, totalSeats)
     {
         base.InitializeSeats();
     }

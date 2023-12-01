@@ -23,7 +23,7 @@ public abstract class Carriage
         }
     }
 
-    private List<Dictionary<string, Ticket?>> Seats { get; set; }
+    public List<Dictionary<string, Ticket?>> Seats { get; set; }
     
     protected Carriage(int price, Enum CarriageType, int totalSeats)
     {
@@ -31,7 +31,11 @@ public abstract class Carriage
         this.type = type;
         this.TotalSeats = totalSeats;
 
-        this.Seats = new List<Dictionary<string, Ticket?>>(totalSeats / 4);
+        Seats = new List<Dictionary<string, Ticket?>>();
+        for (int i = 0; i < totalSeats / 4; i++)
+        {
+            Seats.Add(new Dictionary<string, Ticket>());
+        }
     }
     
     private protected virtual void InitializeSeats()
@@ -48,5 +52,15 @@ public abstract class Carriage
                 coupe.Add($"t{i}", null);
             }
         }
+    }
+    
+    public void AddTicket(Ticket ticket)
+    {
+        Seats[ticket.CoupeIndex][ticket.Seat] = ticket;
+    }
+
+    public void RemoveTicket(Ticket ticket)
+    {
+        Seats[ticket.CoupeIndex][ticket.Seat] = null;
     }
 }

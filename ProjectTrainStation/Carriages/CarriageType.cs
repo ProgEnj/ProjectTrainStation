@@ -2,7 +2,6 @@
 
 public enum CarriageType
 {
-    Basic,
     CorridorCoach,
     SleepingCar,
     CouchetteCar

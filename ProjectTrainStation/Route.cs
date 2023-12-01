@@ -1,22 +1,22 @@
 ﻿namespace ProjectTrainStation;
 
-public class Route : IStatistic
+public class Route : ITicketStatistic
 {
-    public Statistic Statistic { get; }
+    public TicketStatistic TicketStatistic { get; }
 
     public string Title { get; }
     
-    private Train AssignedTrain { get; set; }
+    public Train AssignedTrain { get; }
     
     public TrainStation Departure { get; }
     public TrainStation Destination { get; }
 
     public DateTime departureTime { get; }
     public DateTime ArrivalTime { get; }
-    public DateTime Gap { get; }
+    public int Gap { get; }
 
-    public Route(string title, Train assignedTrain, TrainStation departure, 
-        TrainStation destination, DateTime departureTime, DateTime arrivalTime, DateTime gap)
+    public Route(Train assignedTrain, TrainStation departure, 
+        TrainStation destination, DateTime departureTime, DateTime arrivalTime, int gap)
     {
         Title = departure.Name + "-" + destination.Name;
         AssignedTrain = assignedTrain;
@@ -25,7 +25,20 @@ public class Route : IStatistic
         this.departureTime = departureTime;
         ArrivalTime = arrivalTime;
         Gap = gap;
-        Statistic = new Statistic();
+        TicketStatistic = new TicketStatistic();
     }
 
+    public void AddTicket(Ticket ticket)
+    {
+        AssignedTrain.AddTicket(ticket);
+        TicketStatistic.AddRecord(ticket);
+        Departure.TicketStatistic.AddRecord(ticket);
+    }
+
+    public void RemoveTicket(Ticket ticket)
+    {
+        AssignedTrain.RemoveTicket(ticket);
+        TicketStatistic.RemoveRecord(ticket);
+        Departure.TicketStatistic.RemoveRecord(ticket);
+    }
 }

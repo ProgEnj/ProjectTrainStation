@@ -2,8 +2,7 @@
 
 public class SleepingCar : Carriage
 {
-    public SleepingCar(int price, Enum CarriageType, int totalSeats) : base(price, CarriageType, totalSeats)
+    public SleepingCar(int totalSeats) : base(150, CarriageType.SleepingCar, totalSeats)
     {
-        base.InitializeSeats();
     }
 }

@@ -2,7 +2,8 @@
 
 public class CouchetteCar : Carriage
 {
-    public CouchetteCar(int price, Enum CarriageType, int totalSeats) : base(price, CarriageType, totalSeats)
+    public CouchetteCar(int totalSeats) : base(50, CarriageType.CouchetteCar, totalSeats)
     {
+        base.InitializeSeats();
     }
 }

@@ -3,11 +3,11 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace ProjectTrainStation;
 
-public class Statistic
+public class TicketStatistic
 {
     public List<Ticket> TicketRecords;
 
-    public Statistic()
+    public TicketStatistic()
     {
         TicketRecords = new List<Ticket>();
     }
@@ -25,7 +25,7 @@ public class Statistic
     public int SoldForToday()
     {
         return TicketRecords
-            .Where(ticket => ticket.creationData == DateTime.Now)
+            .Where(ticket => ticket.creationData == DateTime.Today)
             .Count();
     }
 
